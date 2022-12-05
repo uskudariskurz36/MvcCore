@@ -1,0 +1,59 @@
+﻿@*ul>li>p>lorem*@
+<!-- ul>li>p>lorem -->
+<ul>
+    <li>
+        <p>Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</p>
+    </li>
+</ul>
+
+<p>Sit amet, consectetur.</p>
+
+@*ul>li*5>lorem3*@
+
+<ul>
+    <li>Sit amet, consectetur.</li>
+    <li>Adipiscing elit fusce.</li>
+    <li>Vel sapien elit.</li>
+    <li>In malesuada semper.</li>
+    <li>Mi, id sollicitudin.</li>
+</ul>
+
+@*p.box>lorem3*@
+<p class="box">Sit amet, consectetur.</p>
+
+@*p#box>lorem4*@
+<p id="box">Amet, consectetur adipiscing elit.</p>
+
+@*p.box#box>lorem3*@
+<p id="box" class="box">Sit amet, consectetur.</p>
+
+@*.row>.col*@
+<div class="row">
+    <div class="col"></div>
+</div>
+
+@*a.box[target="_blank"]>{click me}*@
+<a href="" class="box" target="_blank">click me</a>
+
+@*ul>li.item#item$$*5>lorem3*@
+<ul>
+    <li id="item01" class="item">Sit amet, consectetur.</li>
+    <li id="item02" class="item">Adipiscing elit fusce.</li>
+    <li id="item03" class="item">Vel sapien elit.</li>
+    <li id="item04" class="item">In malesuada semper.</li>
+    <li id="item05" class="item">Mi, id sollicitudin.</li>
+</ul>
+
+@*div>a>lorem2^a>lorem3*@
+@*div>(a>lorem2)+(a>lorem3)*@
+<div>
+    <a href="">Dolor sit.</a>
+    <a href="">Sit amet, consectetur.</a>
+</div>
+
+@*div+p+ul>li*@
+<div></div>
+<p></p>
+<ul>
+    <li></li>
+</ul>
