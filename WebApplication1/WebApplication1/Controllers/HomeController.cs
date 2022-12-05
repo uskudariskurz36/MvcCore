@@ -16,7 +16,14 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(string uname, string upass)
         {
             return View();
         }
