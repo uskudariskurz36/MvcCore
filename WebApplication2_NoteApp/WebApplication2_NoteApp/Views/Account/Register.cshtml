@@ -1,6 +1,6 @@
 ﻿<div class="row">
     <div class="col-sm-4 offset-4">
-        <form>
+        <form method="post">
             <div class="mb-3 text-center text-secondary">
                 <i class="fa-solid fa-user-plus fa-6x"></i>
             </div>
@@ -8,16 +8,31 @@
             <div class="form-floating mb-3">
                 <input type="text" name="username" placeholder="username" class="form-control" />
                 <label for="username">Username</label>
+
+                @if (ViewData["err-username"] != null)
+                {
+                    <div class="text-danger small text-end">@ViewData["err-username"]</div>
+                }
             </div>
 
             <div class="form-floating mb-3">
                 <input type="password" name="password" placeholder="password" class="form-control" />
                 <label for="password">Password</label>
+
+                @if (ViewData["err-password"] != null)
+                {
+                    <div class="text-danger small text-end">@ViewData["err-password"]</div>
+                }
             </div>
 
             <div class="form-floating mb-3">
                 <input type="password" name="repassword" placeholder="re-password" class="form-control" />
                 <label for="repassword">Re-Password</label>
+
+                @if (ViewData["err-repassword"] != null)
+                {
+                    <div class="text-danger small text-end">@ViewData["err-repassword"]</div>
+                }
             </div>
 
             <div class="text-center">
