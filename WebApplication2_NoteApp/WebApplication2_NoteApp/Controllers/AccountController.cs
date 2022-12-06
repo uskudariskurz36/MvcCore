@@ -1,6 +1,7 @@
 ﻿using CheckPasswordStrength;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2_NoteApp.Helpers;
+using WebApplication2_NoteApp.Models;
 
 namespace WebApplication2_NoteApp.Controllers
 {
@@ -61,6 +62,24 @@ namespace WebApplication2_NoteApp.Controllers
             }
 
             return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // kullanıcı uname ve şifre kontrol
+            }
+
+            return View(model);
         }
     }
 }
