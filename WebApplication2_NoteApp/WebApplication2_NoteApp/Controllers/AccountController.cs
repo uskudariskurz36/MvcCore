@@ -1,5 +1,6 @@
 ﻿using CheckPasswordStrength;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using WebApplication2_NoteApp.Helpers;
 using WebApplication2_NoteApp.Models;
 
@@ -14,54 +15,29 @@ namespace WebApplication2_NoteApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(string username, string password, string repassword)
+        public IActionResult Register(RegisterModel model)
         {
-            bool valid = true;
-
-            if (string.IsNullOrEmpty(username))
+            if(ModelState.IsValid)
             {
-                ViewData["err-username"] = "Username is required.";
-                valid = false;
-            }
-
-            if (string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(password))
-            {
-                ViewData["err-password"] = "Password is required.";
-                valid = false;
-            }
-            else
-            {
-                StrengthProperty checkPass = ClassifyStrength.PasswordStrength(password);
+                StrengthProperty checkPass = ClassifyStrength.PasswordStrength(model.Password);
                 ViewData["err-password-strength-text"] = checkPass.Value;
                 ViewData["err-password-strength"] = checkPass.Id;
 
-                if (checkPass.Id == 0)
+                if (checkPass.Id == 0)  // şifre weak (zayıf) ise..
                 {
-                    valid = false;
+                    ModelState.AddModelError("Password", "Şifre uygun değildir.");
                 }
             }
 
-            if (string.IsNullOrEmpty(repassword))
-            {
-                ViewData["err-repassword"] = "Re-Password is required.";
-                valid = false;
-            }
-
-            if (password != repassword)
-            {
-                ViewData["err-repassword"] = "Password and re-password does not match.";
-                valid = false;
-            }
-
-            if (valid)
+            if (ModelState.IsValid)
             {
                 UserManager userManager = new UserManager();
-                bool done = userManager.AddUser(username, password);
+                bool done = userManager.AddUser(model.Username, model.Password);
 
                 ViewData["done"] = done;
             }
 
-            return View();
+            return View(model);
         }
 
 
@@ -76,7 +52,17 @@ namespace WebApplication2_NoteApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                // kullanıcı uname ve şifre kontrol
+                UserManager userManager = new UserManager();
+                bool isExists = userManager.Authenticate(model.Username, model.Password);
+
+                if (isExists)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Hatalı kullanıcı adı ya da şifre!");
+                }
             }
 
             return View(model);

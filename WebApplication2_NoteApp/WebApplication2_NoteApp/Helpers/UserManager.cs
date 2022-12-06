@@ -25,5 +25,18 @@ namespace WebApplication2_NoteApp.Helpers
 
             return result > 0;
         }
+
+        public bool Authenticate(string username, string password)
+        {
+            command.CommandText = "SELECT COUNT(*) FROM Users WHERE Username=@username AND Password=@password";
+            command.Parameters.AddWithValue("@username", username);
+            command.Parameters.AddWithValue("@password", password);
+
+            connection.Open();
+            int count = (int)command.ExecuteScalar();
+            connection.Close();
+
+            return count > 0;
+        }
     }
 }
