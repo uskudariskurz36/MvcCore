@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Check.Password.Strength" Version="1.0.3" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
 
 </Project>

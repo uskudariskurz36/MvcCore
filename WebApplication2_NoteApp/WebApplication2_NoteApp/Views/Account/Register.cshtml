@@ -58,6 +58,18 @@
                     <i class="fa-solid fa-floppy-disk me-2"></i>Register
                 </button>
             </div>
+
+            @if (ViewData["done"] != null)
+            {
+                if ((bool)ViewData["done"] == true)
+                {
+                    <div class="alert alert-success mt-3">User is registered.</div>
+                }
+                else
+                {
+                    <div class="alert alert-danger mt-3">User is not registered.</div>
+                }
+            }
         </form>
     </div>
 </div>
