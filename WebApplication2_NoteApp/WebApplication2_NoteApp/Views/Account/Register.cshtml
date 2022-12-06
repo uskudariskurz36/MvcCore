@@ -23,6 +23,24 @@
                 {
                     <div class="text-danger small text-end">@ViewData["err-password"]</div>
                 }
+
+                @if (ViewData["err-password-strength"] != null)
+                {
+                    switch (ViewData["err-password-strength"])
+                    {
+                        case 0:
+                            <div class="border-bottom border-danger text-danger mt-2">@ViewData["err-password-strength-text"]</div>
+                            break;
+                        case 1:
+                            <div class="border-bottom border-warning text-warning mt-2">@ViewData["err-password-strength-text"]</div>
+                            break;
+                        case 2:
+                            <div class="border-bottom border-success text-success mt-2">@ViewData["err-password-strength-text"]</div>
+                            break;
+                        default:
+                            break;
+                    }
+                }
             </div>
 
             <div class="form-floating mb-3">

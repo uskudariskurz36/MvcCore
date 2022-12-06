@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CheckPasswordStrength;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication2_NoteApp.Controllers
 {
@@ -18,9 +19,15 @@ namespace WebApplication2_NoteApp.Controllers
                 ViewData["err-username"] = "Username is required.";
             }
 
-            if (string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(password))
             {
                 ViewData["err-password"] = "Password is required.";
+            }
+            else
+            {
+                StrengthProperty checkPass = ClassifyStrength.PasswordStrength(password);
+                ViewData["err-password-strength-text"] = checkPass.Value;
+                ViewData["err-password-strength"] = checkPass.Id;
             }
 
             if (string.IsNullOrEmpty(repassword))
@@ -33,6 +40,7 @@ namespace WebApplication2_NoteApp.Controllers
                 ViewData["err-repassword"] = "Password and re-password does not match.";
             }
 
+          
 
             return View();
         }
