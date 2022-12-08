@@ -31,6 +31,11 @@
                 </button>
                 <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
             </div>
+
+            @if (ViewData["ok"] != null)
+            {
+                <div class="alert alert-success mt-3">@ViewData["ok"]</div>
+            }
         </form>
 
     </div>
