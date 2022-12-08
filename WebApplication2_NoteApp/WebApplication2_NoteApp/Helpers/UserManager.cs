@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System.Data;
+using System.Data.SqlClient;
 
 namespace WebApplication2_NoteApp.Helpers
 {
@@ -26,17 +27,29 @@ namespace WebApplication2_NoteApp.Helpers
             return result > 0;
         }
 
-        public bool Authenticate(string username, string password)
+        public User Authenticate(string username, string password)
         {
-            command.CommandText = "SELECT COUNT(*) FROM Users WHERE Username=@username AND Password=@password";
+            command.CommandText = "SELECT Id,Name,Surname,Username FROM Users WHERE Username=@username AND Password=@password";
             command.Parameters.AddWithValue("@username", username);
             command.Parameters.AddWithValue("@password", password);
 
             connection.Open();
-            int count = (int)command.ExecuteScalar();
+
+            SqlDataReader reader = command.ExecuteReader();
+            User user = null;
+
+            while (reader.Read())
+            {
+                user = new User();
+                user.Id = reader.GetInt32("Id");
+                user.Name = reader.GetString("Name");
+                user.Surname = reader.GetString("Surname");
+                user.Username = reader.GetString("Username");
+            }
+
             connection.Close();
 
-            return count > 0;
+            return user;
         }
     }
 }

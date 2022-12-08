@@ -53,11 +53,14 @@ namespace WebApplication2_NoteApp.Controllers
             if (ModelState.IsValid)
             {
                 UserManager userManager = new UserManager();
-                bool isExists = userManager.Authenticate(model.Username, model.Password);
+                User user = userManager.Authenticate(model.Username, model.Password);
 
-                if (isExists)
+                if (user != null)
                 {
-                    return RedirectToAction("Index", "Home");
+                    NoteController noteController = new NoteController();
+                    noteController._userId = user.Id;
+
+                    return RedirectToAction("Index", "Note");
                 }
                 else
                 {
