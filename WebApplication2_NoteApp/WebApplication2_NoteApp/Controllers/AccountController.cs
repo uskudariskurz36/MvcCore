@@ -57,9 +57,9 @@ namespace WebApplication2_NoteApp.Controllers
 
                 if (user != null)
                 {
-                    NoteController noteController = new NoteController();
-                    noteController._userId = user.Id;
-
+                    HttpContext.Session.SetInt32("userid", user.Id);
+                    HttpContext.Session.SetString("username", user.Username);
+                    
                     return RedirectToAction("Index", "Note");
                 }
                 else
@@ -69,6 +69,20 @@ namespace WebApplication2_NoteApp.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login");
         }
     }
 }

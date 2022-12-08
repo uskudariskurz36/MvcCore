@@ -4,11 +4,11 @@ namespace WebApplication2_NoteApp.Controllers
 {
     public class NoteController : Controller
     {
-        public int _userId = 0;
-
         public IActionResult Index()
         {
-            if(_userId == 0)
+            int? userid = HttpContext.Session.GetInt32("userid");
+
+            if(userid == null)
             {
                 return RedirectToAction("Login", "Account");
             }

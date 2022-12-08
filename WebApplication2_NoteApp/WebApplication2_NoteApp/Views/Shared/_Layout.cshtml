@@ -26,16 +26,41 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item ms-auto">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">
-                                <i class="fa-solid fa-user-plus me-2"></i>Register
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">
-                                <i class="fa-solid fa-right-to-bracket me-2"></i>Login
-                            </a>
-                        </li>
+
+                        @if (ViewContext.HttpContext.Session.GetInt32("userid") != null)
+                        {
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Note" asp-action="Index">Notes</a>
+                            </li>
+
+                             <li class="nav-item ms-auto">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Profile">
+                                    <i class="fa-solid fa-user me-2"></i>@ViewContext.HttpContext.Session.GetString("username")
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">
+                                    <i class="fa-solid fa-sign-out me-2"></i>Çıkış
+                                </a>
+                            </li>
+
+                        }
+                        else
+                        {
+
+                            <li class="nav-item ms-auto">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">
+                                    <i class="fa-solid fa-user-plus me-2"></i>Register
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">
+                                    <i class="fa-solid fa-right-to-bracket me-2"></i>Login
+                                </a>
+                            </li>
+
+                        }
                     </ul>
                 </div>
             </div>
