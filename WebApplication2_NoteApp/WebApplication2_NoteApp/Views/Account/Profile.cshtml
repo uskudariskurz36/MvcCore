@@ -10,22 +10,28 @@
 <div class="row">
     <div class="col-sm-6">
 
-        <p class="small text-center">Bu kısımdan adınızı ve soyadınızı güncelleyebilirsiniz.</p>
+        <form method="post">
+            <p class="small text-center">Bu kısımdan adınızı ve soyadınızı güncelleyebilirsiniz.</p>
 
-        <div class="form-floating mb-3">
-            <input type="text" asp-for="Name" placeholder="name" class="form-control" />
-            <label asp-for="Name"></label>
-        </div>
+            <div class="form-floating mb-3">
+                <input type="text" asp-for="Name" placeholder="name" class="form-control" />
+                <label asp-for="Name"></label>
+                <span asp-validation-for="Name" class="text-danger small"></span>
+            </div>
 
-        <div class="form-floating mb-3">
-            <input type="text" asp-for="Surname" placeholder="surname" class="form-control" />
-            <label asp-for="Surname"></label>
-        </div>
+            <div class="form-floating mb-3">
+                <input type="text" asp-for="Surname" placeholder="surname" class="form-control" />
+                <label asp-for="Surname"></label>
+                <span asp-validation-for="Surname" class="text-danger small"></span>
+            </div>
 
-        <div>
-            <button type="submit" class="btn btn-primary">
-                <i class="fa fa-save me-2"></i>Save
-            </button>
-        </div>
+            <div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-save me-2"></i>Save
+                </button>
+                <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+            </div>
+        </form>
+
     </div>
 </div>

@@ -75,5 +75,19 @@ namespace WebApplication2_NoteApp.Helpers
 
             return user;
         }
+
+        public bool UpdateProfile(int userId, string name, string surname)
+        {
+            command.CommandText = "UPDATE Users SET Name=@name,Surname=@surname WHERE Id=@id";
+            command.Parameters.AddWithValue("@name", name);
+            command.Parameters.AddWithValue("@surname", surname);
+            command.Parameters.AddWithValue("@id", userId);
+
+            connection.Open();
+            int result = command.ExecuteNonQuery();
+            connection.Close();
+
+            return result > 0;
+        }
     }
 }

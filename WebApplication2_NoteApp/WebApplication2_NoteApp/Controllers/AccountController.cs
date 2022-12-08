@@ -17,7 +17,7 @@ namespace WebApplication2_NoteApp.Controllers
         [HttpPost]
         public IActionResult Register(RegisterModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 StrengthProperty checkPass = ClassifyStrength.PasswordStrength(model.Password);
                 ViewData["err-password-strength-text"] = checkPass.Value;
@@ -59,7 +59,7 @@ namespace WebApplication2_NoteApp.Controllers
                 {
                     HttpContext.Session.SetInt32("userid", user.Id);
                     HttpContext.Session.SetString("username", user.Username);
-                    
+
                     return RedirectToAction("Index", "Note");
                 }
                 else
@@ -84,9 +84,41 @@ namespace WebApplication2_NoteApp.Controllers
             UserManager userManager = new UserManager();
             User user = userManager.GetUserById(userid.Value);
 
+            ProfileModel model = new ProfileModel();
+            model.Name = user.Name;
+            model.Surname = user.Surname;
 
+            return View(model);
+        }
 
-            return View();
+        [HttpPost]
+        public IActionResult Profile(ProfileModel model)
+        {
+            int? userid = HttpContext.Session.GetInt32("userid");
+
+            if (userid == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            if (ModelState.IsValid)
+            {
+                UserManager userManager = new UserManager();
+                bool done = userManager.UpdateProfile(userid.Value, model.Name, model.Surname);
+
+                //if (done == false)
+                if (!done)
+                {
+                    ModelState.AddModelError("", "İşlem yapılamadı. Bir hata oluştu.");
+                    return View(model);
+                }
+            }
+            else
+            {
+                return View(model);
+            }
+
+            return RedirectToAction("Profile");
         }
 
 
