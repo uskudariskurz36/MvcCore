@@ -81,6 +81,9 @@ namespace WebApplication2_NoteApp.Controllers
                 return RedirectToAction("Login");
             }
 
+            UserManager userManager = new UserManager();
+            User user = userManager.GetUserById(userid.Value);
+
 
 
             return View();
