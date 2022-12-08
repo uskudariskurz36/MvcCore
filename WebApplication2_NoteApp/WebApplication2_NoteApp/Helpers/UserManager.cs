@@ -51,5 +51,29 @@ namespace WebApplication2_NoteApp.Helpers
 
             return user;
         }
+
+        public User GetUserById(int userId)
+        {
+            command.CommandText = "SELECT Id,Name,Surname,Username FROM Users WHERE Id = @userid";
+            command.Parameters.AddWithValue("@userid", userId);
+
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+            User user = null;
+
+            while (reader.Read())
+            {
+                user = new User();
+                user.Id = reader.GetInt32("Id");
+                user.Name = reader.IsDBNull("Name") ? "" : reader.GetString("Name");
+                user.Surname = reader.IsDBNull("Surname") ? "" : reader.GetString("Surname");
+                user.Username = reader.GetString("Username");
+            }
+
+            connection.Close();
+
+            return user;
+        }
     }
 }
