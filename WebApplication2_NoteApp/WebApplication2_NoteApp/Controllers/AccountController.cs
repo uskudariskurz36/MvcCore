@@ -101,6 +101,15 @@ namespace WebApplication2_NoteApp.Controllers
                 return RedirectToAction("Login");
             }
 
+            if (model.IsUpdatePassword)
+            {
+                if (string.IsNullOrEmpty(model.Password) || string.IsNullOrEmpty(model.RePassword) ||
+                    string.IsNullOrWhiteSpace(model.Password) || string.IsNullOrWhiteSpace(model.RePassword))
+                {
+                    ModelState.AddModelError("", "Şifre ya da şifre tekrar boş geçilemez.");
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 UserManager userManager = new UserManager();
@@ -122,7 +131,7 @@ namespace WebApplication2_NoteApp.Controllers
                 }
                 else
                 {
-                    ViewData["ok"] = "Profil güncellendi.";
+                    ViewData["ok"] = "Bilgiler kaydedildi.";
                 }
             }
 

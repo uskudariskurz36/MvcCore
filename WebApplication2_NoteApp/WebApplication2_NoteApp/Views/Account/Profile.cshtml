@@ -1,20 +1,26 @@
 ﻿@model ProfileModel
 
 
-<div class="row">
+<div class="row mb-3">
     <div class="col">
         <h1 class="display-4 border-bottom">Profile</h1>
     </div>
 </div>
 
-<div class="row">
+<div class="row mb-3">
+    <div class="col">
+        <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+    </div>
+</div>
+
+<div class="row mb-3">
     <div class="col-sm-6">
+        <div class="text-center">
+            <h4>Ad Soyad Güncelleme</h4>
+            <p>Bu kısımdan adınızı ve soyadınızı güncelleyebilirsiniz.</p>
+        </div>
 
         <form method="post">
-            <div class="text-center">
-                <h4>Ad Soyad Güncelleme</h4>
-                <p>Bu kısımdan adınızı ve soyadınızı güncelleyebilirsiniz.</p>
-            </div>
 
             <div class="form-floating mb-3">
                 <input type="text" asp-for="Name" placeholder="name" class="form-control" />
@@ -32,24 +38,7 @@
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-save me-2"></i>Save
                 </button>
-                <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
             </div>
-
-            @if (ViewData["ok"] != null)
-            {
-                <div>
-                    <div id="lblSuccess" class="alert alert-success mt-3">@ViewData["ok"]</div>
-
-                    <script>
-                        setTimeout(removeSuccess, 3000);
-
-                        function removeSuccess() {
-                            //$("#lblSuccess").remove();
-                            $("#lblSuccess").fadeOut();
-                        }
-                    </script>
-                </div>
-            }
         </form>
 
     </div>
@@ -61,13 +50,13 @@
 
         <form method="post">
             <div class="form-floating mb-3">
-                <input type="text" asp-for="Password" placeholder="password" class="form-control" />
+                <input type="password" asp-for="Password" placeholder="password" class="form-control" />
                 <label asp-for="Password"></label>
                 <span asp-validation-for="Password" class="text-danger small"></span>
             </div>
 
             <div class="form-floating mb-3">
-                <input type="text" asp-for="RePassword" placeholder="re-password" class="form-control" />
+                <input type="password" asp-for="RePassword" placeholder="re-password" class="form-control" />
                 <label asp-for="RePassword"></label>
                 <span asp-validation-for="RePassword" class="text-danger small"></span>
             </div>
@@ -77,8 +66,27 @@
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-save me-2"></i>Save
                 </button>
-                <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
             </div>
         </form>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-4 offset-4">
+        @if (ViewData["ok"] != null)
+        {
+            <div>
+                <div id="lblSuccess" class="alert alert-success mt-3 text-center">@ViewData["ok"]</div>
+
+                <script>
+                    setTimeout(removeSuccess, 3000);
+
+                    function removeSuccess() {
+                        //$("#lblSuccess").remove();
+                        $("#lblSuccess").fadeOut();
+                    }
+                </script>
+            </div>
+        }
     </div>
 </div>
