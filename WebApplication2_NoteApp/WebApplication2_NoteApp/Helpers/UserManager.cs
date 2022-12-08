@@ -42,8 +42,8 @@ namespace WebApplication2_NoteApp.Helpers
             {
                 user = new User();
                 user.Id = reader.GetInt32("Id");
-                user.Name = reader.GetString("Name");
-                user.Surname = reader.GetString("Surname");
+                user.Name = reader.IsDBNull("Name") ? "" : reader.GetString("Name");
+                user.Surname = reader.IsDBNull("Surname") ? "" : reader.GetString("Surname");
                 user.Username = reader.GetString("Username");
             }
 
