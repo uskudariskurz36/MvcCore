@@ -104,7 +104,16 @@ namespace WebApplication2_NoteApp.Controllers
             if (ModelState.IsValid)
             {
                 UserManager userManager = new UserManager();
-                bool done = userManager.UpdateProfile(userid.Value, model.Name, model.Surname);
+                bool done = false;
+
+                if (model.IsUpdatePassword)
+                {
+                    done = userManager.UpdatePassword(userid.Value, model.Password);
+                }
+                else
+                {
+                    done = userManager.UpdateProfile(userid.Value, model.Name, model.Surname);
+                }
 
                 //if (done == false)
                 if (!done)
