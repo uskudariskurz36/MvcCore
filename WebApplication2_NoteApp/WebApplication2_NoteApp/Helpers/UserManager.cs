@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using System.Xml.Linq;
 
 namespace WebApplication2_NoteApp.Helpers
 {
@@ -81,6 +82,19 @@ namespace WebApplication2_NoteApp.Helpers
             command.CommandText = "UPDATE Users SET Name=@name,Surname=@surname WHERE Id=@id";
             command.Parameters.AddWithValue("@name", name);
             command.Parameters.AddWithValue("@surname", surname);
+            command.Parameters.AddWithValue("@id", userId);
+
+            connection.Open();
+            int result = command.ExecuteNonQuery();
+            connection.Close();
+
+            return result > 0;
+        }
+
+        public bool UpdatePassword(int userId, string? password)
+        {
+            command.CommandText = "UPDATE Users SET Password=@password WHERE Id=@id";
+            command.Parameters.AddWithValue("@password", password);
             command.Parameters.AddWithValue("@id", userId);
 
             connection.Open();
