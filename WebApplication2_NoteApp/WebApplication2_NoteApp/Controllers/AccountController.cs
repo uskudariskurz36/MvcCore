@@ -110,19 +110,14 @@ namespace WebApplication2_NoteApp.Controllers
                 if (!done)
                 {
                     ModelState.AddModelError("", "İşlem yapılamadı. Bir hata oluştu.");
-                    return View(model);
                 }
                 else
                 {
                     ViewData["ok"] = "Profil güncellendi.";
                 }
             }
-            else
-            {
-                return View(model);
-            }
 
-            return RedirectToAction("Profile");
+            return View(model);
         }
 
 

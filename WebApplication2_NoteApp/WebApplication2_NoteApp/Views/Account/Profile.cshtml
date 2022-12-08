@@ -34,7 +34,16 @@
 
             @if (ViewData["ok"] != null)
             {
-                <div class="alert alert-success mt-3">@ViewData["ok"]</div>
+                <div id="lblSuccess" class="alert alert-success mt-3">@ViewData["ok"]</div>
+
+                <script>
+                    setTimeout(removeSuccess, 3000);
+
+                    function removeSuccess() {
+                        //$("#lblSuccess").remove();
+                        $("#lblSuccess").fadeOut();
+                    }
+                </script>
             }
         </form>
 
