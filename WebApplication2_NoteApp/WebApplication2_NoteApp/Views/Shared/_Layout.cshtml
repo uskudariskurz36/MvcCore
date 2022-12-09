@@ -34,15 +34,32 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Note" asp-action="Index">Notes</a>
                             </li>
 
-                             <li class="nav-item ms-auto">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Profile">
-                                    <i class="fa-solid fa-user me-2"></i>@ViewContext.HttpContext.Session.GetString("username")
+
+                            <li class="nav-item dropdown ms-auto">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @ViewContext.HttpContext.Session.GetString("username")
                                 </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">
-                                    <i class="fa-solid fa-sign-out me-2"></i>Çıkış
-                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Account" asp-action="Profile">
+                                            <i class="fa-solid fa-user me-2"></i>Profile
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Account" asp-action="ProfilePicture">
+                                            <i class="fa-regular fa-id-badge me-2"></i>Profile Image
+                                        </a>
+                                    </li>
+
+                                    <li><hr class="dropdown-divider"></li>
+
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Account" asp-action="Logout">
+                                            <i class="fa-solid fa-sign-out me-2"></i>Çıkış
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
 
                         }
