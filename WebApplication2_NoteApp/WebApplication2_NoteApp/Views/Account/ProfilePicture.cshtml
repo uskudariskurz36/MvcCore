@@ -14,7 +14,9 @@
     <div class="col-sm-9 my-auto">
         <form method="post" enctype="multipart/form-data">
             <div class="d-flex align-items-center">
-                <input type="file" class="form-control" asp-for="NewPicture" />
+                <input type="file" class="form-control" asp-for="NewPicture" accept=".png, .jpeg, .jpg" />
+            </div>
+            <div>
                 <span class="text-danger small" asp-validation-for="NewPicture"></span>
             </div>
             <div class="mt-2 text-end">

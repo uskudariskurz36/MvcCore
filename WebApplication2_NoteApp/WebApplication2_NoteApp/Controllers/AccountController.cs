@@ -158,6 +158,40 @@ namespace WebApplication2_NoteApp.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult ProfilePicture(ProfilePictureModel model)
+        {
+            int? userid = HttpContext.Session.GetInt32("userid");
+
+            if (userid == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            if (ModelState.IsValid)
+            {
+                string filename = "user_";  // user_
+                filename += userid;         // user_1
+
+                // model.NewPicture.ContentType = "image/png"
+
+                string ext = model.NewPicture.ContentType.Split('/')[1];    // png | jpg | jpeg
+                filename += "." + ext;      // user_1.png
+
+                FileStream fileStream = new FileStream($"wwwroot/img/{filename}", FileMode.OpenOrCreate);
+                model.NewPicture.CopyTo(fileStream);
+
+                fileStream.Close();
+            }
+
+            UserManager userManager = new UserManager();
+            User user = userManager.GetUserById(userid.Value);
+
+            ViewData["PictureName"] = user.Picture;
+            //ViewBag.PictureName = user.Picture;
+
+            return View(model);
+        }
 
 
         [HttpGet]
