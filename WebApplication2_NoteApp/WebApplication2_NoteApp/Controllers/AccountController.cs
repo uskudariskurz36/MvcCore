@@ -140,6 +140,21 @@ namespace WebApplication2_NoteApp.Controllers
 
 
         [HttpGet]
+        public IActionResult ProfilePicture()
+        {
+            int? userid = HttpContext.Session.GetInt32("userid");
+
+            if (userid == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            return View();
+        }
+
+
+
+        [HttpGet]
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
