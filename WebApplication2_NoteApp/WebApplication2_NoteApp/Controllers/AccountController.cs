@@ -182,6 +182,9 @@ namespace WebApplication2_NoteApp.Controllers
                 model.NewPicture.CopyTo(fileStream);
 
                 fileStream.Close();
+
+                UserManager userManager2 = new UserManager();
+                userManager2.UpdateProfilePicture(userid.Value, filename);
             }
 
             UserManager userManager = new UserManager();

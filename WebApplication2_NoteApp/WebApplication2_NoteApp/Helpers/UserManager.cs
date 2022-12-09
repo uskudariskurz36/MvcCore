@@ -104,5 +104,18 @@ namespace WebApplication2_NoteApp.Helpers
 
             return result > 0;
         }
+
+        public bool UpdateProfilePicture(int userId, string filename)
+        {
+            command.CommandText = "UPDATE Users SET Picture=@picture WHERE Id=@id";
+            command.Parameters.AddWithValue("@picture", filename);
+            command.Parameters.AddWithValue("@id", userId);
+
+            connection.Open();
+            int result = command.ExecuteNonQuery();
+            connection.Close();
+
+            return result > 0;
+        }
     }
 }
