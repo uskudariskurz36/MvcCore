@@ -55,7 +55,7 @@ namespace WebApplication2_NoteApp.Helpers
 
         public User GetUserById(int userId)
         {
-            command.CommandText = "SELECT Id,Name,Surname,Username FROM Users WHERE Id = @userid";
+            command.CommandText = "SELECT Id,Name,Surname,Username,Picture FROM Users WHERE Id = @userid";
             command.Parameters.AddWithValue("@userid", userId);
 
             connection.Open();
@@ -70,6 +70,7 @@ namespace WebApplication2_NoteApp.Helpers
                 user.Name = reader.IsDBNull("Name") ? "" : reader.GetString("Name");
                 user.Surname = reader.IsDBNull("Surname") ? "" : reader.GetString("Surname");
                 user.Username = reader.GetString("Username");
+                user.Picture = reader.GetString("Picture");
             }
 
             connection.Close();

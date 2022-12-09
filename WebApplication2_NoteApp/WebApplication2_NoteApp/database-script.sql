@@ -88,11 +88,14 @@ CREATE TABLE [dbo].[Notes](
 	[CreatedDate] [datetime] NOT NULL,
 	[IsDraft] [bit] NOT NULL,
 	[UserID] [int] NOT NULL,
+	[Picture] [nvarchar](25) NOT NULL,
  CONSTRAINT [PK_Notes] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_Picture]  DEFAULT (N'default.png') FOR [Picture]
 GO
 /****** Object:  Table [dbo].[Users]    Script Date: 6.12.2022 13:11:36 ******/
 SET ANSI_NULLS ON
